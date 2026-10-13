@@ -1,0 +1,5 @@
+threshold,feasible,ranking
+0.985,"A1, A2, A3, A4",A1 > A3 > A4 > A2
+0.99,"A2, A3, A4",A3 > A4 > A2
+0.995,"A3, A4",A3 > A4
+0.9975,,

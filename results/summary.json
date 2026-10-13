@@ -1,0 +1,1757 @@
+{
+ "load_models": {
+  "stochastic": {
+   "peak_hour": 20.0,
+   "peak_to_mean": 1.7844,
+   "daily_cv": 0.0943,
+   "daily_resid_cv": 0.0791,
+   "acf1": 0.8492,
+   "acf96": 0.6201,
+   "max_kw": 28.9357,
+   "mean_t1_offpeak": 2.3278,
+   "mean_t2_midpeak": 6.8906,
+   "mean_t3_onpeak": 10.6777
+  },
+  "h0": {
+   "peak_hour": 19.0,
+   "peak_to_mean": 1.5517,
+   "daily_cv": 0.0519,
+   "daily_resid_cv": 0.0102,
+   "acf1": 0.993,
+   "acf96": 0.9201,
+   "max_kw": 11.8544,
+   "mean_t1_offpeak": 3.3691,
+   "mean_t2_midpeak": 7.4325,
+   "mean_t3_onpeak": 8.3861
+  },
+  "metered": {
+   "peak_hour": 11.0,
+   "peak_to_mean": 1.1631,
+   "daily_cv": 0.1179,
+   "daily_resid_cv": 0.0442,
+   "acf1": 0.9967,
+   "acf96": 0.7329,
+   "max_kw": 9.6909,
+   "mean_t1_offpeak": 5.1653,
+   "mean_t2_midpeak": 7.0608,
+   "mean_t3_onpeak": 6.0623
+  }
+ },
+ "annual_inputs": {
+  "2015": {
+   "load_kwh": 55370.0,
+   "pv_kwh": 22505.3,
+   "wind_kwh": 317.6,
+   "ghi_kwh_m2": 1261.8
+  },
+  "2016": {
+   "load_kwh": 55370.0,
+   "pv_kwh": 20615.7,
+   "wind_kwh": 214.3,
+   "ghi_kwh_m2": 1160.7
+  },
+  "2017": {
+   "load_kwh": 55370.0,
+   "pv_kwh": 22062.2,
+   "wind_kwh": 209.5,
+   "ghi_kwh_m2": 1247.2
+  },
+  "2018": {
+   "load_kwh": 55370.0,
+   "pv_kwh": 22348.9,
+   "wind_kwh": 1100.1,
+   "ghi_kwh_m2": 1272.7
+  },
+  "2019": {
+   "load_kwh": 55370.0,
+   "pv_kwh": 22377.3,
+   "wind_kwh": 349.9,
+   "ghi_kwh_m2": 1250.3
+  },
+  "2020": {
+   "load_kwh": 55370.0,
+   "pv_kwh": 23225.6,
+   "wind_kwh": 368.1,
+   "ghi_kwh_m2": 1293.0
+  },
+  "2021": {
+   "load_kwh": 55370.0,
+   "pv_kwh": 21674.3,
+   "wind_kwh": 260.0,
+   "ghi_kwh_m2": 1208.3
+  }
+ },
+ "period_means_test": {
+  "load_kw": {
+   "t1_offpeak": 2.328,
+   "t2_midpeak": 6.891,
+   "t3_onpeak": 10.678
+  },
+  "pv_kw": {
+   "t1_offpeak": 0.087,
+   "t2_midpeak": 5.825,
+   "t3_onpeak": 0.4
+  },
+  "wind_kw": {
+   "t1_offpeak": 0.052,
+   "t2_midpeak": 0.066,
+   "t3_onpeak": 0.058
+  }
+ },
+ "acf_test": {
+  "load_kw": {
+   "1": 0.8491908088329928,
+   "4": 0.5950591031853693,
+   "96": 0.6201023184097988
+  },
+  "pv_kw": {
+   "1": 0.9942291360832572,
+   "4": 0.9291510862360415,
+   "96": 0.8008196090754981
+  },
+  "wind_kw": {
+   "1": 0.9903588446947309,
+   "4": 0.9056693781735224,
+   "96": 0.411613488496142
+  }
+ },
+ "pv_night_share": 0.0,
+ "targets": {
+  "A2": 0.9,
+  "A4": 0.9
+ },
+ "kpi": {
+  "A1": {
+   "cost_usd": 12718.3242,
+   "energy_cost_usd": 8702.5231,
+   "unmet_kwh": 803.1602,
+   "grid_kwh": 38514.9148,
+   "grid_charge_kwh": 0.0,
+   "discharge_kwh": 0.0,
+   "discharge_re_kwh": 0.0,
+   "curt_kwh": 6874.1616,
+   "dr_kwh": 0.0,
+   "reliability": 0.9855,
+   "self_consumption": 0.7002,
+   "cost_per_served": 0.1595
+  },
+  "A2": {
+   "cost_usd": 11336.6442,
+   "energy_cost_usd": 8826.5256,
+   "unmet_kwh": 502.0237,
+   "grid_kwh": 39334.7719,
+   "grid_charge_kwh": 5381.2633,
+   "discharge_kwh": 4862.5427,
+   "discharge_re_kwh": 5.5952,
+   "curt_kwh": 6867.9619,
+   "dr_kwh": 0.0,
+   "reliability": 0.9909,
+   "self_consumption": 0.7004,
+   "cost_per_served": 0.1609
+  },
+  "A3": {
+   "cost_usd": 9503.2296,
+   "energy_cost_usd": 8321.0181,
+   "unmet_kwh": 236.4423,
+   "grid_kwh": 37316.3705,
+   "grid_charge_kwh": 0.0,
+   "discharge_kwh": 0.0,
+   "discharge_re_kwh": 0.0,
+   "curt_kwh": 6865.0724,
+   "dr_kwh": 3510.0158,
+   "reliability": 0.9956,
+   "self_consumption": 0.7006,
+   "cost_per_served": 0.1559
+  },
+  "A4": {
+   "cost_usd": 9057.5863,
+   "energy_cost_usd": 8385.1474,
+   "unmet_kwh": 134.4878,
+   "grid_kwh": 37937.5521,
+   "grid_charge_kwh": 5382.7711,
+   "discharge_kwh": 4863.544,
+   "discharge_re_kwh": 5.1983,
+   "curt_kwh": 6859.3126,
+   "dr_kwh": 3510.0158,
+   "reliability": 0.9975,
+   "self_consumption": 0.7008,
+   "cost_per_served": 0.1568
+  },
+  "L2": {
+   "cost_usd": 9244.6738,
+   "energy_cost_usd": 8961.9889,
+   "unmet_kwh": 56.537,
+   "grid_kwh": 36461.7135,
+   "grid_charge_kwh": 1780.7853,
+   "discharge_kwh": 4625.1624,
+   "discharge_re_kwh": 3016.2761,
+   "curt_kwh": 3574.6657,
+   "dr_kwh": 0.0,
+   "reliability": 0.999,
+   "self_consumption": 0.8441,
+   "cost_per_served": 0.162
+  },
+  "L3": {
+   "cost_usd": 9502.8599,
+   "energy_cost_usd": 8320.6527,
+   "unmet_kwh": 236.4414,
+   "grid_kwh": 37314.5632,
+   "grid_charge_kwh": 0.0,
+   "discharge_kwh": 0.0,
+   "discharge_re_kwh": 0.0,
+   "curt_kwh": 6861.4179,
+   "dr_kwh": 3506.3231,
+   "reliability": 0.9956,
+   "self_consumption": 0.7007,
+   "cost_per_served": 0.1559
+  },
+  "L4": {
+   "cost_usd": 8458.6839,
+   "energy_cost_usd": 8424.6836,
+   "unmet_kwh": 6.8001,
+   "grid_kwh": 34751.3216,
+   "grid_charge_kwh": 1782.1616,
+   "discharge_kwh": 4619.0664,
+   "discharge_re_kwh": 3008.9365,
+   "curt_kwh": 3570.6993,
+   "dr_kwh": 3508.6772,
+   "reliability": 0.9999,
+   "self_consumption": 0.8443,
+   "cost_per_served": 0.1572
+  }
+ },
+ "n_days": 1460,
+ "S": [
+  [
+   0.6061,
+   0.992,
+   0.8997,
+   0.2674,
+   0.2537
+  ],
+  [
+   0.5286,
+   0.9947,
+   0.8997,
+   0.2675,
+   0.1713
+  ],
+  [
+   0.5942,
+   0.9972,
+   0.9052,
+   0.266,
+   0.2521
+  ],
+  [
+   0.5321,
+   0.9983,
+   0.9052,
+   0.266,
+   0.1763
+  ]
+ ],
+ "Q": [
+  0.0153,
+  -0.0161,
+  0.0145,
+  -0.0129
+ ],
+ "ranking": "A1 > A3 > A4 > A2",
+ "max_offdiag_corr": 0.8958785014649904,
+ "degenerate_hfes": 12,
+ "hfes_with_one": 24,
+ "context_dhfss": [
+  {
+   "variant": "All criteria active in every period ($A_t=\\mathcal{C}$, baseline)",
+   "A1": 0.01533536515729711,
+   "A2": -0.016083810367833906,
+   "A3": 0.014458263102719304,
+   "A4": -0.012874596668716265,
+   "C3_scores": [
+    0.8997,
+    0.8997,
+    0.9052,
+    0.9052
+   ],
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "$C_3$ inactive off-peak and on-peak ($A_{t_1}=A_{t_3}=\\mathcal{C}\\setminus\\{C_3\\}$)",
+   "A1": 0.015879785579565486,
+   "A2": -0.01553938994556553,
+   "A3": 0.013913062588117198,
+   "A4": -0.013419797183318372,
+   "C3_scores": [
+    0.7724,
+    0.7724,
+    0.7724,
+    0.7724
+   ],
+   "ranking": "A1 > A3 > A4 > A2"
+  }
+ ],
+ "criterion_variants": [
+  {
+   "variant": "C1 per served kWh, no penalty; C4 renewable origin (baseline)",
+   "A1": 0.0153,
+   "A2": -0.0161,
+   "A3": 0.0145,
+   "A4": -0.0129,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "C1 total cost, no penalty",
+   "A1": 0.0163,
+   "A2": -0.0152,
+   "A3": 0.0133,
+   "A4": -0.0135,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "C1 total cost incl. unserved-energy penalty",
+   "A1": 0.0139,
+   "A2": -0.0156,
+   "A3": 0.014,
+   "A4": -0.0116,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "variant": "C1 linear-clipped transform $1-y/\\rho$",
+   "A1": 0.01,
+   "A2": -0.0087,
+   "A3": 0.0068,
+   "A4": -0.0076,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "C4 local supply incl. grid-charged storage",
+   "A1": 0.0096,
+   "A2": -0.0112,
+   "A3": 0.0088,
+   "A4": -0.0061,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "C1 with penalty and C4 local (both comparators)",
+   "A1": 0.0082,
+   "A2": -0.0107,
+   "A3": 0.0083,
+   "A4": -0.0048,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_1$ (renewable-origin $C_4$)",
+   "A1": 0.0089,
+   "A2": -0.0111,
+   "A3": 0.0107,
+   "A4": -0.0079,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_2$ (renewable-origin $C_4$)",
+   "A1": 0.0201,
+   "A2": -0.0199,
+   "A3": 0.0177,
+   "A4": -0.0168,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_3$ (renewable-origin $C_4$)",
+   "A1": 0.0198,
+   "A2": -0.0194,
+   "A3": 0.0174,
+   "A4": -0.0168,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_4$ (renewable-origin $C_4$)",
+   "A1": 0.019,
+   "A2": -0.0203,
+   "A3": 0.0183,
+   "A4": -0.0159,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_5$ (renewable-origin $C_4$)",
+   "A1": 0.0089,
+   "A2": -0.0098,
+   "A3": 0.0082,
+   "A4": -0.007,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_1$ (local $C_4$)",
+   "A1": 0.0017,
+   "A2": -0.0049,
+   "A3": 0.0036,
+   "A4": 0.0005,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_2$ (local $C_4$)",
+   "A1": 0.0129,
+   "A2": -0.0138,
+   "A3": 0.0105,
+   "A4": -0.0083,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_3$ (local $C_4$)",
+   "A1": 0.0127,
+   "A2": -0.0133,
+   "A3": 0.0103,
+   "A4": -0.0083,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_4$ (local $C_4$)",
+   "A1": 0.019,
+   "A2": -0.0203,
+   "A3": 0.0183,
+   "A4": -0.0159,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "variant": "leave out $C_5$ (local $C_4$)",
+   "A1": 0.0018,
+   "A2": -0.0036,
+   "A3": 0.0011,
+   "A4": 0.0015,
+   "ranking": "A1 > A4 > A3 > A2"
+  }
+ ],
+ "reliability_test": {
+  "A1": 0.9854946679692305,
+  "A2": 0.9909332899216745,
+  "A3": 0.9955899008793887,
+  "A4": 0.9974915469553889
+ },
+ "reliability_constraint": [
+  {
+   "threshold": 0.985,
+   "feasible": "A1, A2, A3, A4",
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "threshold": 0.99,
+   "feasible": "A2, A3, A4",
+   "ranking": "A3 > A4 > A2"
+  },
+  {
+   "threshold": 0.995,
+   "feasible": "A3, A4",
+   "ranking": "A3 > A4"
+  },
+  {
+   "threshold": 0.9975,
+   "feasible": "",
+   "ranking": ""
+  }
+ ],
+ "hfe_construction": [
+  {
+   "construction": "meansd:0",
+   "A1": 0.01643,
+   "A2": -0.01658,
+   "A3": 0.01461,
+   "A4": -0.01354,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 0.0
+  },
+  {
+   "construction": "meansd:0.25",
+   "A1": 0.01644,
+   "A2": -0.01657,
+   "A3": 0.01461,
+   "A4": -0.01355,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 1e-05
+  },
+  {
+   "construction": "meansd:0.5",
+   "A1": 0.01647,
+   "A2": -0.01655,
+   "A3": 0.01457,
+   "A4": -0.01355,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 5e-05
+  },
+  {
+   "construction": "meansd:1.0",
+   "A1": 0.01595,
+   "A2": -0.01642,
+   "A3": 0.01445,
+   "A4": -0.01309,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 0.00048
+  },
+  {
+   "construction": "meansd:1.5",
+   "A1": 0.01484,
+   "A2": -0.01593,
+   "A3": 0.01397,
+   "A4": -0.01209,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 0.00159
+  },
+  {
+   "construction": "meansd:2.0",
+   "A1": 0.01301,
+   "A2": -0.01522,
+   "A3": 0.01374,
+   "A4": -0.01085,
+   "ranking": "A3 > A1 > A4 > A2",
+   "max_abs_dQ": 0.00342
+  },
+  {
+   "construction": "bootstrap",
+   "A1": 0.01641,
+   "A2": -0.0166,
+   "A3": 0.0146,
+   "A4": -0.01348,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 6e-05
+  },
+  {
+   "construction": "quantile",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 0.0011
+  },
+  {
+   "construction": "quantile19",
+   "A1": 0.01682,
+   "A2": -0.0167,
+   "A3": 0.01469,
+   "A4": -0.01385,
+   "ranking": "A1 > A3 > A4 > A2",
+   "max_abs_dQ": 0.00039
+  }
+ ],
+ "max_dQ_hesitancy": 0.0034173517220285055,
+ "operators_methods": [
+  {
+   "operator": "IND-AR",
+   "eps": 0.0,
+   "method": "MABAC",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-EIN",
+   "eps": 0.0,
+   "method": "MABAC",
+   "A1": 0.01791,
+   "A2": -0.01569,
+   "A3": 0.0138,
+   "A4": -0.01511,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-EIN",
+   "eps": 0.001,
+   "method": "MABAC",
+   "A1": 0.01706,
+   "A2": -0.01643,
+   "A3": 0.01455,
+   "A4": -0.01428,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-EIN",
+   "eps": 0.01,
+   "method": "MABAC",
+   "A1": 0.01688,
+   "A2": -0.01652,
+   "A3": 0.0147,
+   "A4": -0.01415,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-ALG",
+   "eps": 0.0,
+   "method": "MABAC",
+   "A1": 0.01813,
+   "A2": -0.01554,
+   "A3": 0.01355,
+   "A4": -0.01523,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-ALG",
+   "eps": 0.001,
+   "method": "MABAC",
+   "A1": 0.01734,
+   "A2": -0.01623,
+   "A3": 0.01426,
+   "A4": -0.01445,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-ALG",
+   "eps": 0.01,
+   "method": "MABAC",
+   "A1": 0.01714,
+   "A2": -0.01634,
+   "A3": 0.01442,
+   "A4": -0.0143,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "COM-AR",
+   "eps": 0.0,
+   "method": "MABAC",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "COM-EIN",
+   "eps": 0.0,
+   "method": "MABAC",
+   "A1": 0.0177,
+   "A2": -0.01535,
+   "A3": 0.01339,
+   "A4": -0.01487,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "COM-EIN",
+   "eps": 0.001,
+   "method": "MABAC",
+   "A1": 0.01633,
+   "A2": -0.01658,
+   "A3": 0.01464,
+   "A4": -0.01352,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "COM-EIN",
+   "eps": 0.01,
+   "method": "MABAC",
+   "A1": 0.01624,
+   "A2": -0.01662,
+   "A3": 0.01474,
+   "A4": -0.01347,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "COM-ALG",
+   "eps": 0.0,
+   "method": "MABAC",
+   "A1": 0.01773,
+   "A2": -0.01484,
+   "A3": 0.01277,
+   "A4": -0.01481,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "COM-ALG",
+   "eps": 0.001,
+   "method": "MABAC",
+   "A1": 0.01646,
+   "A2": -0.01597,
+   "A3": 0.01391,
+   "A4": -0.01356,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "COM-ALG",
+   "eps": 0.01,
+   "method": "MABAC",
+   "A1": 0.01633,
+   "A2": -0.01605,
+   "A3": 0.01405,
+   "A4": -0.01347,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-AR",
+   "eps": 0.0,
+   "method": "WSM",
+   "A1": 0.60378,
+   "A2": 0.57236,
+   "A3": 0.6029,
+   "A4": 0.57557,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-AR",
+   "eps": 0.0,
+   "method": "TOPSIS",
+   "A1": 0.97873,
+   "A2": 0.01526,
+   "A3": 0.94411,
+   "A4": 0.06274,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "operator": "IND-AR",
+   "eps": 0.0,
+   "method": "HF-TOPSIS",
+   "A1": 0.89417,
+   "A2": 0.04875,
+   "A3": 0.87057,
+   "A4": 0.1351,
+   "ranking": "A1 > A3 > A4 > A2"
+  }
+ ],
+ "absorbing_by_criterion": {
+  "C1": 0,
+  "C2": 12,
+  "C3": 12,
+  "C4": 0,
+  "C5": 0
+ },
+ "absorbed_cells_EIN": 8,
+ "normalization": [
+  {
+   "scheme": "N1",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "scheme": "N1c",
+   "A1": 0.01521,
+   "A2": -0.0167,
+   "A3": 0.01487,
+   "A4": -0.01247,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "scheme": "N2",
+   "A1": -0.03311,
+   "A2": 0.05385,
+   "A3": -0.03885,
+   "A4": 0.07941,
+   "ranking": "A4 > A2 > A1 > A3"
+  },
+  {
+   "scheme": "N3",
+   "A1": 0.0355,
+   "A2": -0.02786,
+   "A3": 0.02272,
+   "A4": -0.02769,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "scheme": "N4",
+   "A1": 0.06576,
+   "A2": -0.03896,
+   "A3": 0.04526,
+   "A4": -0.05278,
+   "ranking": "A1 > A3 > A2 > A4"
+  }
+ ],
+ "coupling": {
+  "n_cells": 20,
+  "n_nondegenerate": 20,
+  "pos_median": 0.28850665294128697,
+  "pos_min": -0.021158542378574605,
+  "pos_max": 0.49897847652766614,
+  "n_emp_below_ind": 1,
+  "emp_le_com_all": true,
+  "L_order_ok": true
+ },
+ "risk_rankings": [
+  {
+   "score": "S-0sd",
+   "coupling": "IND",
+   "A1": 0.60613,
+   "A2": 0.57312,
+   "A3": 0.60431,
+   "A4": 0.57616,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-0.5sd",
+   "coupling": "IND",
+   "A1": 0.56749,
+   "A2": 0.53633,
+   "A3": 0.56634,
+   "A4": 0.53995,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-1sd",
+   "coupling": "IND",
+   "A1": 0.52885,
+   "A2": 0.49954,
+   "A3": 0.52837,
+   "A4": 0.50375,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-2sd",
+   "coupling": "IND",
+   "A1": 0.45156,
+   "A2": 0.42597,
+   "A3": 0.45242,
+   "A4": 0.43133,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "S-4sd",
+   "coupling": "IND",
+   "A1": 0.297,
+   "A2": 0.27882,
+   "A3": 0.30053,
+   "A4": 0.28651,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "L10",
+   "coupling": "IND",
+   "A1": 0.01052,
+   "A2": -0.01374,
+   "A3": 0.01183,
+   "A4": -0.00805,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "L25",
+   "coupling": "IND",
+   "A1": 0.01296,
+   "A2": -0.01486,
+   "A3": 0.01288,
+   "A4": -0.01026,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-0sd",
+   "coupling": "EMP",
+   "A1": 0.60613,
+   "A2": 0.57312,
+   "A3": 0.60431,
+   "A4": 0.57616,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-0.5sd",
+   "coupling": "EMP",
+   "A1": 0.56563,
+   "A2": 0.53459,
+   "A3": 0.56441,
+   "A4": 0.53818,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-1sd",
+   "coupling": "EMP",
+   "A1": 0.52513,
+   "A2": 0.49607,
+   "A3": 0.5245,
+   "A4": 0.50019,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-2sd",
+   "coupling": "EMP",
+   "A1": 0.44413,
+   "A2": 0.41901,
+   "A3": 0.44469,
+   "A4": 0.42423,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "S-4sd",
+   "coupling": "EMP",
+   "A1": 0.28214,
+   "A2": 0.26491,
+   "A3": 0.28507,
+   "A4": 0.2723,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "L10",
+   "coupling": "EMP",
+   "A1": 0.00967,
+   "A2": -0.01332,
+   "A3": 0.01133,
+   "A4": -0.00718,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "L25",
+   "coupling": "EMP",
+   "A1": 0.0129,
+   "A2": -0.01474,
+   "A3": 0.01268,
+   "A4": -0.01012,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-0sd",
+   "coupling": "COM",
+   "A1": 0.60613,
+   "A2": 0.57312,
+   "A3": 0.60431,
+   "A4": 0.57616,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-0.5sd",
+   "coupling": "COM",
+   "A1": 0.55811,
+   "A2": 0.5274,
+   "A3": 0.55663,
+   "A4": 0.53089,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-1sd",
+   "coupling": "COM",
+   "A1": 0.51008,
+   "A2": 0.48169,
+   "A3": 0.50896,
+   "A4": 0.48563,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-2sd",
+   "coupling": "COM",
+   "A1": 0.41404,
+   "A2": 0.39026,
+   "A3": 0.4136,
+   "A4": 0.39509,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "score": "S-4sd",
+   "coupling": "COM",
+   "A1": 0.22194,
+   "A2": 0.20739,
+   "A3": 0.22289,
+   "A4": 0.21403,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "L10",
+   "coupling": "COM",
+   "A1": 0.00444,
+   "A2": -0.01144,
+   "A3": 0.0095,
+   "A4": -0.0021,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "score": "L25",
+   "coupling": "COM",
+   "A1": 0.00965,
+   "A2": -0.01252,
+   "A3": 0.0103,
+   "A4": -0.00696,
+   "ranking": "A3 > A1 > A4 > A2"
+  }
+ ],
+ "beta_star": {
+  "A1-A2": {
+   "IND": 8.903595420823324,
+   "EMP": 8.366604706340798,
+   "COM": 7.152036506155532
+  },
+  "A1-A3": {
+   "IND": 1.3584926284751448,
+   "EMP": 1.5302708645746472,
+   "COM": 2.629109818582583
+  },
+  "A1-A4": {
+   "IND": 6.1537120724159164,
+   "EMP": 5.955091595627977,
+   "COM": 5.4356674227934905
+  },
+  "A2-A3": {
+   "IND": 13.167666465746313,
+   "EMP": 11.31345383801891,
+   "COM": 7.9493929868993565
+  },
+  "A2-A4": {
+   "IND": null,
+   "EMP": null,
+   "COM": null
+  },
+  "A3-A4": {
+   "IND": 7.971534653921891,
+   "EMP": 7.323068721197614,
+   "COM": 5.83830108042742
+  }
+ },
+ "criterion_weights": [
+  {
+   "weights": "Equal (baseline)",
+   "w": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "A1": 0.0153,
+   "A2": -0.0161,
+   "A3": 0.0145,
+   "A4": -0.0129,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "weights": "ROC, $C_2\\succ C_1\\succ C_4\\succ C_3\\succ C_5$",
+   "w": [
+    0.257,
+    0.457,
+    0.09,
+    0.157,
+    0.04
+   ],
+   "A1": 0.0105,
+   "A2": -0.0115,
+   "A3": 0.01,
+   "A4": -0.0085,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "weights": "ROC, $C_1\\succ C_2\\succ C_3\\succ C_4\\succ C_5$",
+   "w": [
+    0.457,
+    0.257,
+    0.157,
+    0.09,
+    0.04
+   ],
+   "A1": 0.0192,
+   "A2": -0.0188,
+   "A3": 0.0157,
+   "A4": -0.0153,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "weights": "Entropy (objective)",
+   "w": [
+    0.1,
+    0.0,
+    0.0,
+    0.0,
+    0.899
+   ],
+   "A1": 0.041,
+   "A2": -0.0409,
+   "A3": 0.0383,
+   "A4": -0.036,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "weights": "Stated vector $(0.25,0.25,0.20,0.15,0.15)$",
+   "w": [
+    0.25,
+    0.25,
+    0.2,
+    0.15,
+    0.15
+   ],
+   "A1": 0.0151,
+   "A2": -0.0159,
+   "A3": 0.0141,
+   "A4": -0.0125,
+   "ranking": "A1 > A3 > A4 > A2"
+  }
+ ],
+ "smaa_flat": [
+  [
+   0.6049,
+   0.3845,
+   0.0091,
+   0.0015
+  ],
+  [
+   0.0,
+   0.0,
+   0.0059,
+   0.9941
+  ],
+  [
+   0.3947,
+   0.6053,
+   0.0,
+   0.0
+  ],
+  [
+   0.0004,
+   0.0102,
+   0.985,
+   0.0044
+  ]
+ ],
+ "smaa_conc": [
+  [
+   0.8336,
+   0.1664,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  [
+   0.1664,
+   0.8336,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   1.0,
+   0.0
+  ]
+ ],
+ "central_weights": [
+  [
+   0.278,
+   0.143,
+   0.14,
+   0.218,
+   0.22
+  ],
+  [
+   NaN,
+   NaN,
+   NaN,
+   NaN,
+   NaN
+  ],
+  [
+   0.081,
+   0.284,
+   0.289,
+   0.176,
+   0.17
+  ],
+  [
+   0.004,
+   0.813,
+   0.059,
+   0.119,
+   0.004
+  ]
+ ],
+ "temporal": [
+  {
+   "temporal": "Duration $(8,10,6)/24$ (baseline)",
+   "w1": 0.3333,
+   "w2": 0.4167,
+   "w3": 0.25,
+   "A1": 0.0153,
+   "A2": -0.0161,
+   "A3": 0.0145,
+   "A4": -0.0129,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "temporal": "Equal",
+   "w1": 0.3333,
+   "w2": 0.3333,
+   "w3": 0.3333,
+   "A1": 0.0135,
+   "A2": -0.0157,
+   "A3": 0.014,
+   "A4": -0.011,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "temporal": "Demand share",
+   "w1": 0.1228,
+   "w2": 0.4545,
+   "w3": 0.4226,
+   "A1": 0.0019,
+   "A2": -0.0068,
+   "A3": 0.0058,
+   "A4": -0.0008,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "temporal": "Tariff emphasis $\\lambda=0$, $\\theta=0.5$",
+   "w1": 0.3167,
+   "w2": 0.3417,
+   "w3": 0.3417,
+   "A1": 0.0126,
+   "A2": -0.015,
+   "A3": 0.0133,
+   "A4": -0.0102,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "temporal": "Tariff emphasis $\\lambda=0.5$, $\\theta=0.5$",
+   "w1": 0.2432,
+   "w2": 0.3286,
+   "w3": 0.4282,
+   "A1": 0.0073,
+   "A2": -0.0117,
+   "A3": 0.0101,
+   "A4": -0.0054,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "temporal": "Tariff emphasis $\\lambda=1$, $\\theta=0.5$",
+   "w1": 0.195,
+   "w2": 0.2974,
+   "w3": 0.5076,
+   "A1": 0.0033,
+   "A2": -0.0093,
+   "A3": 0.0079,
+   "A4": -0.0017,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "temporal": "Tariff emphasis $\\lambda=2$, $\\theta=0.5$",
+   "w1": 0.1579,
+   "w2": 0.2337,
+   "w3": 0.6084,
+   "A1": -0.0005,
+   "A2": -0.0074,
+   "A3": 0.006,
+   "A4": 0.002,
+   "ranking": "A3 > A4 > A1 > A2"
+  }
+ ],
+ "bootstrap_pairs": [
+  {
+   "pair": "A1-A2",
+   "point": 0.03142,
+   "lo": 0.03083,
+   "hi": 0.0322,
+   "p_pos": 1.0
+  },
+  {
+   "pair": "A1-A3",
+   "point": 0.00088,
+   "lo": 0.00011,
+   "hi": 0.00179,
+   "p_pos": 0.988
+  },
+  {
+   "pair": "A1-A4",
+   "point": 0.02821,
+   "lo": 0.02727,
+   "hi": 0.02903,
+   "p_pos": 1.0
+  },
+  {
+   "pair": "A2-A3",
+   "point": -0.03054,
+   "lo": -0.03185,
+   "hi": -0.02932,
+   "p_pos": 0.0
+  },
+  {
+   "pair": "A2-A4",
+   "point": -0.00321,
+   "lo": -0.00421,
+   "hi": -0.00226,
+   "p_pos": 0.0
+  },
+  {
+   "pair": "A3-A4",
+   "point": 0.02733,
+   "lo": 0.02672,
+   "hi": 0.02803,
+   "p_pos": 1.0
+  }
+ ],
+ "bootstrap_p_first": [
+  0.988,
+  0.0,
+  0.012,
+  0.0
+ ],
+ "per_year": [
+  {
+   "year": 2018,
+   "A1": 0.01584,
+   "A2": -0.01673,
+   "A3": 0.01483,
+   "A4": -0.01306,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "year": 2019,
+   "A1": 0.01552,
+   "A2": -0.01625,
+   "A3": 0.01464,
+   "A4": -0.01304,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "year": 2020,
+   "A1": 0.01555,
+   "A2": -0.01638,
+   "A3": 0.01466,
+   "A4": -0.01298,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "year": 2021,
+   "A1": 0.015,
+   "A2": -0.01547,
+   "A3": 0.01397,
+   "A4": -0.0127,
+   "ranking": "A1 > A3 > A4 > A2"
+  }
+ ],
+ "load_model_rankings": [
+  {
+   "case": "load:stochastic",
+   "targets": "A2:0.9, A4:0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "case": "load:h0",
+   "targets": "A2:0.75, A4:0.75",
+   "A1": 0.01396,
+   "A2": -0.01572,
+   "A3": 0.01508,
+   "A4": -0.01224,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "case": "load:metered",
+   "targets": "A2:0.75, A4:0.75",
+   "A1": 0.00944,
+   "A2": -0.0107,
+   "A3": 0.0102,
+   "A4": -0.00831,
+   "ranking": "A3 > A1 > A4 > A2"
+  }
+ ],
+ "Q_with_ceilings": {
+  "A1": 0.0047,
+  "A2": -0.0268,
+  "A3": 0.0038,
+  "A4": -0.0236,
+  "L2": 0.0208,
+  "L3": 0.0038,
+  "L4": 0.019
+ },
+ "ranking_with_ceilings": "L2 > L4 > A1 > L3 > A3 > A4 > A2",
+ "oat": [
+  {
+   "parameter": "Battery capacity (kWh)",
+   "value": 10.0,
+   "targets": "0.9/0.75",
+   "A1": 0.01451,
+   "A2": -0.01622,
+   "A3": 0.01363,
+   "A4": -0.01109,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Battery capacity (kWh)",
+   "value": 20.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Battery capacity (kWh)",
+   "value": 30.0,
+   "targets": "0.9/0.9",
+   "A1": 0.0143,
+   "A2": -0.01594,
+   "A3": 0.01342,
+   "A4": -0.01106,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Battery capacity (kWh)",
+   "value": 40.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01173,
+   "A2": -0.01456,
+   "A3": 0.01085,
+   "A4": -0.00749,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Grid-import limit (kW)",
+   "value": 10.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01248,
+   "A2": -0.01331,
+   "A3": 0.01136,
+   "A4": -0.00982,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Grid-import limit (kW)",
+   "value": 12.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01436,
+   "A2": -0.01484,
+   "A3": 0.01283,
+   "A4": -0.01158,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Grid-import limit (kW)",
+   "value": 14.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Grid-import limit (kW)",
+   "value": 16.0,
+   "targets": "0.9/0.75",
+   "A1": 0.01402,
+   "A2": -0.0185,
+   "A3": 0.01424,
+   "A4": -0.00891,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "parameter": "Grid-import limit (kW)",
+   "value": 18.0,
+   "targets": "0.75/0.6",
+   "A1": 0.01081,
+   "A2": -0.01492,
+   "A3": 0.01187,
+   "A4": -0.00696,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "parameter": "DR cap $\\rho^{\\max}$",
+   "value": 0.05,
+   "targets": "0.9/0.9",
+   "A1": 0.01622,
+   "A2": -0.0152,
+   "A3": 0.0147,
+   "A4": -0.01483,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "DR cap $\\rho^{\\max}$",
+   "value": 0.1,
+   "targets": "0.9/0.9",
+   "A1": 0.01574,
+   "A2": -0.01568,
+   "A3": 0.01475,
+   "A4": -0.01393,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "DR cap $\\rho^{\\max}$",
+   "value": 0.15,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "DR cap $\\rho^{\\max}$",
+   "value": 0.2,
+   "targets": "0.9/0.75",
+   "A1": 0.01355,
+   "A2": -0.01787,
+   "A3": 0.01309,
+   "A4": -0.00797,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "DR rebound share $\\beta_{\\mathrm{DR}}$",
+   "value": 0.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01484,
+   "A2": -0.01658,
+   "A3": 0.01633,
+   "A4": -0.01368,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "parameter": "DR rebound share $\\beta_{\\mathrm{DR}}$",
+   "value": 0.5,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "DR rebound share $\\beta_{\\mathrm{DR}}$",
+   "value": 1.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01625,
+   "A2": -0.01517,
+   "A3": 0.01193,
+   "A4": -0.01224,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Fixed-cost multiplier",
+   "value": 0.5,
+   "targets": "0.9/0.9",
+   "A1": 0.01321,
+   "A2": -0.01476,
+   "A3": 0.01326,
+   "A4": -0.01101,
+   "ranking": "A3 > A1 > A4 > A2"
+  },
+  {
+   "parameter": "Fixed-cost multiplier",
+   "value": 1.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Fixed-cost multiplier",
+   "value": 2.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01911,
+   "A2": -0.0184,
+   "A3": 0.01646,
+   "A4": -0.01602,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Unserved-energy penalty (USD/kWh)",
+   "value": 1.0,
+   "targets": "0.75/0.75",
+   "A1": 0.0127,
+   "A2": -0.01292,
+   "A3": 0.01182,
+   "A4": -0.01077,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Unserved-energy penalty (USD/kWh)",
+   "value": 5.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Unserved-energy penalty (USD/kWh)",
+   "value": 10.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "On-peak price (USD/kWh)",
+   "value": 0.2,
+   "targets": "0.9/0.75",
+   "A1": 0.01466,
+   "A2": -0.01707,
+   "A3": 0.01364,
+   "A4": -0.01035,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "On-peak price (USD/kWh)",
+   "value": 0.3,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "On-peak price (USD/kWh)",
+   "value": 0.4,
+   "targets": "0.9/0.9",
+   "A1": 0.01518,
+   "A2": -0.01608,
+   "A3": 0.01442,
+   "A4": -0.0127,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "PV scaling",
+   "value": 0.8,
+   "targets": "0.9/0.9",
+   "A1": 0.01549,
+   "A2": -0.0153,
+   "A3": 0.01379,
+   "A4": -0.01315,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "PV scaling",
+   "value": 1.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "PV scaling",
+   "value": 1.2,
+   "targets": "0.9/0.75",
+   "A1": 0.01395,
+   "A2": -0.01779,
+   "A3": 0.01371,
+   "A4": -0.00902,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Wind scaling",
+   "value": 0.8,
+   "targets": "0.9/0.9",
+   "A1": 0.01532,
+   "A2": -0.01611,
+   "A3": 0.01447,
+   "A4": -0.01284,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Wind scaling",
+   "value": 1.0,
+   "targets": "0.9/0.9",
+   "A1": 0.01534,
+   "A2": -0.01608,
+   "A3": 0.01446,
+   "A4": -0.01287,
+   "ranking": "A1 > A3 > A4 > A2"
+  },
+  {
+   "parameter": "Wind scaling",
+   "value": 1.2,
+   "targets": "0.9/0.9",
+   "A1": 0.01542,
+   "A2": -0.01607,
+   "A3": 0.01441,
+   "A4": -0.01292,
+   "ranking": "A1 > A3 > A4 > A2"
+  }
+ ],
+ "oat_first": {
+  "A1": 27,
+  "A3": 4
+ },
+ "gsa_winner_share": {
+  "A3": 0.4667,
+  "A1": 0.4417,
+  "A4": 0.0833,
+  "A2": 0.0083
+ },
+ "gsa_n": 120,
+ "gsa_indices": [
+  {
+   "output": "gap_A1_A3",
+   "factor": "grid_max",
+   "mu_star": 0.00281,
+   "sigma": 0.0029,
+   "mu": -0.00259,
+   "mu_star_conf": 0.00129
+  },
+  {
+   "output": "gap_A1_A3",
+   "factor": "c_unmet",
+   "mu_star": 0.0,
+   "sigma": 0.0,
+   "mu": 0.0,
+   "mu_star_conf": 0.0
+  },
+  {
+   "output": "gap_A1_A3",
+   "factor": "battery_kwh",
+   "mu_star": 0.0,
+   "sigma": 0.0,
+   "mu": 0.0,
+   "mu_star_conf": 0.0
+  },
+  {
+   "output": "gap_A1_A3",
+   "factor": "dr_cap",
+   "mu_star": 0.00353,
+   "sigma": 0.00235,
+   "mu": -0.00353,
+   "mu_star_conf": 0.00099
+  },
+  {
+   "output": "gap_A1_A3",
+   "factor": "tariff_ratio",
+   "mu_star": 0.00143,
+   "sigma": 0.00172,
+   "mu": -0.00092,
+   "mu_star_conf": 0.0005
+  },
+  {
+   "output": "lead_A4",
+   "factor": "grid_max",
+   "mu_star": 0.01641,
+   "sigma": 0.02016,
+   "mu": 0.00558,
+   "mu_star_conf": 0.00572
+  },
+  {
+   "output": "lead_A4",
+   "factor": "c_unmet",
+   "mu_star": 0.0034,
+   "sigma": 0.00969,
+   "mu": -0.0034,
+   "mu_star_conf": 0.00443
+  },
+  {
+   "output": "lead_A4",
+   "factor": "battery_kwh",
+   "mu_star": 0.00548,
+   "sigma": 0.00785,
+   "mu": 0.00313,
+   "mu_star_conf": 0.00259
+  },
+  {
+   "output": "lead_A4",
+   "factor": "dr_cap",
+   "mu_star": 0.00384,
+   "sigma": 0.00333,
+   "mu": 0.00384,
+   "mu_star_conf": 0.00134
+  },
+  {
+   "output": "lead_A4",
+   "factor": "tariff_ratio",
+   "mu_star": 0.01684,
+   "sigma": 0.01313,
+   "mu": -0.01652,
+   "mu_star_conf": 0.0054
+  }
+ ]
+}

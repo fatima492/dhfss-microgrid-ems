@@ -1,0 +1,15 @@
+# Python 3.10 or newer. Install with:  python -m pip install -r requirements.txt
+# Tested on Python 3.13 with two package sets that give identical results:
+#   newest : numpy 2.5.3, pandas 3.0.5, scipy 1.18.1, matplotlib 3.11.2, pvlib 0.16.1, demandlib 0.2.2, SALib 1.6.0
+#   older  : numpy 2.1.3, pandas 2.2.3, scipy 1.14.1, matplotlib 3.10.0, pvlib 0.11.2, demandlib 0.2.2, SALib 1.5.1
+numpy>=2.1
+pandas>=2.2
+scipy>=1.14          # linprog with the HiGHS solver (LP ceilings)
+matplotlib>=3.10
+pyparsing<3.3        # matplotlib < 3.11 fails with pyparsing 3.3 when rendering math text
+pvlib>=0.11          # Erbs decomposition, PVWatts chain
+demandlib>=0.2.2     # BDEW H0 comparator profile
+SALib>=1.5           # Morris screening
+
+# Optional, only to regenerate data/household_load_15min.csv (python src/gen_household_load.py):
+# richardsonpy==0.2.3
