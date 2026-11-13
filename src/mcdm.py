@@ -300,3 +300,68 @@ def bootstrap_Q(X, omega, w, B=1000, block=28, seed=2026):
         S = scores_quantile(X[..., idx], omega)
         Qs[b] = mabac(S, w)[0]
     return Qs
+
+
+# ------------------------------------------------------------- conventional crisp MCDM methods (revision, R3.1)
+def _minmax(X, is_cost):
+    X = np.asarray(X, float); lo, hi = X.min(0), X.max(0); span = np.where(hi > lo, hi - lo, 1.0)
+    Z = np.where(is_cost, (hi - X) / span, (X - lo) / span)
+    return np.where(hi > lo, Z, 1.0)
+
+
+def wsm_minmax(X, w, is_cost):
+    return _minmax(X, is_cost) @ w
+
+
+def mabac_minmax(X, w, is_cost):
+    """Original MABAC of Pamucar and Cirovic (2015): min-max normalization across alternatives."""
+    return mabac(_minmax(X, is_cost), w)[0]
+
+
+def topsis_vector(X, w, is_cost):
+    return topsis(X, w, cost_cols=np.where(is_cost)[0])[0]
+
+
+def vikor(X, w, is_cost, v=0.5):
+    """VIKOR (Opricovic and Tzeng, 2004); returns -Q so that larger is better."""
+    X = np.asarray(X, float)
+    best = np.where(is_cost, X.min(0), X.max(0)); worst = np.where(is_cost, X.max(0), X.min(0))
+    span = np.where(np.abs(best - worst) > 0, best - worst, 1.0)
+    d = w * (best - X) / span
+    S, R = d.sum(1), d.max(1)
+    sS = (S.max() - S.min()) or 1.0; sR = (R.max() - R.min()) or 1.0
+    Q = v * (S - S.min()) / sS + (1 - v) * (R - R.min()) / sR
+    return -Q
+
+
+def promethee2(X, w, is_cost):
+    """PROMETHEE II (Brans et al., 1986), V-shape preference with threshold p_j = range of criterion j."""
+    X = np.asarray(X, float); m = X.shape[0]
+    sgn = np.where(is_cost, -1.0, 1.0)
+    rng_ = X.max(0) - X.min(0); rng_ = np.where(rng_ > 0, rng_, 1.0)
+    D_ = sgn * (X[:, None, :] - X[None, :, :]) / rng_
+    P_ = np.clip(D_, 0, 1)
+    pi = (P_ * w).sum(-1)
+    return (pi.sum(1) - pi.sum(0)) / (m - 1)
+
+
+def kendall_tau(a, b):
+    from scipy.stats import kendalltau
+    return float(kendalltau(a, b).statistic)
+
+
+def pairwise_reversal_rate(score_fn, labels, min_size=3):
+    """Share of (subset, pair) combinations whose order differs from the order in the full set.
+
+    score_fn(list_of_labels) -> scores for those labels (larger is better)."""
+    from itertools import combinations
+    full = dict(zip(labels, score_fn(labels)))
+    n_tot = n_rev = 0
+    for k in range(min_size, len(labels)):
+        for sub in combinations(labels, k):
+            s = dict(zip(sub, score_fn(list(sub))))
+            for a, b in combinations(sub, 2):
+                n_tot += 1
+                if np.sign(s[a] - s[b]) != np.sign(full[a] - full[b]):
+                    n_rev += 1
+    return n_rev / n_tot, n_tot

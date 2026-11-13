@@ -1,0 +1,10 @@
+method,normalization,ranking,kendall_tau,reversal_rate,n_subset_pairs,boot_top_stability,top
+DHFSS: THFWA$^{\perp}_{\mathrm{AR}}$ + MABAC (baseline),reference point,A5 > A6 > A1 > A3 > A2 > A4,0.9999999999999999,0.0,28050,1.0,A5
+DHFSS: risk-averse $R^{\mathrm{emp}}_{2}$,reference point,A5 > A6 > A1 > A3 > A2 > A4,0.9999999999999999,0.0,28050,1.0,A5
+DHFSS: lower-tail $L^{\mathrm{emp}}_{0.10}$ + MABAC,reference point,A5 > A6 > A1 > A3 > A4 > A2,0.8666666666666666,0.0,28050,1.0,A5
+Crisp WSM,reference point,A6 > A5 > A3 > A2 > A1 > A4,0.6,0.0,28050,1.0,A6
+Crisp WSM (SAW),min--max,A6 > A5 > A3 > A4 > A2 > A1,0.3333333333333333,0.006809269162210339,28050,1.0,A6
+Crisp MABAC (original),min--max,A6 > A5 > A3 > A4 > A2 > A1,0.3333333333333333,0.006809269162210339,28050,1.0,A6
+TOPSIS,vector,A6 > A5 > A3 > A4 > A1 > A2,0.4666666666666666,0.0026381461675579324,28050,1.0,A6
+VIKOR ($v=0.5$),linear (best--worst),A2 > A6 > A5 > A3 > A4 > A1,0.06666666666666665,0.13775401069518717,28050,0.9966666666666667,A2
+PROMETHEE II (V-shape),"pairwise, range",A6 > A5 > A3 > A4 > A2 > A1,0.3333333333333333,0.006809269162210339,28050,1.0,A6

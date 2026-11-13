@@ -214,7 +214,12 @@ def build_inputs(pv_scale=1.0, wind_scale=1.0, load_model="stochastic", years=No
 
 def diagnostics(df: pd.DataFrame) -> dict:
     hourly = df.groupby("hour")[["load_kw", "pv_kw", "wind_kw", "price"]].mean()
-    acf = {c: {lag: float(df[c].autocorr(lag)) for lag in (1, 4, 96)} for c in ["load_kw", "pv_kw", "wind_kw"]}
+    def _ac(x, lag):
+        x = x.to_numpy(float)
+        if np.nanstd(x) == 0:
+            return float("nan")                   # constant series (no wind turbine at the second site)
+        return float(np.corrcoef(x[:-lag], x[lag:])[0, 1])
+    acf = {c: {lag: _ac(df[c], lag) for lag in (1, 4, 96)} for c in ["load_kw", "pv_kw", "wind_kw"]}
     per = df.groupby("period")[["load_kw", "pv_kw", "wind_kw"]].mean()
     yrs = df.index.year
     annual = pd.DataFrame({"load_kwh": df.load_kw.groupby(yrs).sum() * 0.25,
@@ -235,3 +240,37 @@ if __name__ == "__main__":
     for lm in ["h0", "metered"]:
         d = build_inputs(load_model=lm); g = diagnostics(d)
         print(lm, g["annual"].round(0).to_dict(orient="list"), round(g["daily_resid_cv"], 4), g["pv_night_share"])
+
+
+# ---------------------------------------------------------------- second site (revision): Sydney, measured load and PV
+SYDNEY_CSV = os.path.join(DATA, "sydney_ausgrid_15min.csv")
+SYDNEY_MD5 = "b4783f9c359a5065e216b6fba562b260"   # derived file written by src/build_sydney_data.py
+SYDNEY_BLOCK_DAYS = 28                  # alternating 28-day blocks: even blocks tune, odd blocks evaluate
+
+
+def build_inputs_sydney(pv_scale=1.0, prices=None) -> pd.DataFrame:
+    """Measured Ausgrid household load (14 homes) and measured PV per kWp, Sydney, 07/2012-06/2013.
+
+    The load is scaled to the same annual demand as the Zurich case, the PV to the same 20 kWp array;
+    there is no wind turbine. The declared tariff periods are applied to the local times of the data."""
+    if not os.path.exists(SYDNEY_CSV):
+        raise FileNotFoundError("run src/build_sydney_data.py first")
+    if md5(SYDNEY_CSV) != SYDNEY_MD5:
+        raise RuntimeError("Sydney data file does not match the published checksum (rebuild with src/build_sydney_data.py)")
+    s = pd.read_csv(SYDNEY_CSV, parse_dates=["Timestamp"], index_col="Timestamp")
+    load = s["load_kw"] * (CONFIG["annual_demand_kwh"] / (s["load_kw"].sum() * 0.25))
+    df = pd.DataFrame({"load_kw": load.to_numpy(), "pv_kw": s["pv_kw_per_kwp"].to_numpy() * CONFIG["pv_kwp"] * pv_scale,
+                       "wind_kw": 0.0, "ghi": np.nan, "temp_air": np.nan}, index=s.index)
+    df["hour"] = df.index.hour
+    df["date"] = df.index.normalize()
+    df["period"] = period_of_hour(df["hour"].to_numpy())
+    pr = prices or CONFIG["prices"]
+    df["price"] = df["period"].map(pr).astype(float)
+    return df
+
+
+def sydney_split(df: pd.DataFrame):
+    """Operating days (07:00-07:00) in alternating 28-day blocks; returns (train, test)."""
+    opday = (df.index - pd.Timedelta(hours=7)).normalize()
+    blk = ((opday - opday.min()).days // SYDNEY_BLOCK_DAYS).to_numpy()
+    return df[blk % 2 == 0], df[blk % 2 == 1]

@@ -1,0 +1,15 @@
+conditions,n,share,winner,purity
+reliability_req <= 0.987 and w_C3 <= 0.129 and w_C1 <= 0.168 and beta <= 1.635,1664,0.0832,A5,0.6941105769230769
+reliability_req <= 0.987 and w_C3 <= 0.129 and w_C1 <= 0.168 and beta > 1.635,1409,0.07045,A1,0.3924769339957417
+reliability_req <= 0.987 and w_C3 <= 0.129 and w_C1 > 0.168 and omega_offpeak <= 0.171,776,0.0388,A5,0.39304123711340205
+reliability_req <= 0.987 and w_C3 <= 0.129 and w_C1 > 0.168 and omega_offpeak > 0.171,1755,0.08775,A1,0.6866096866096867
+reliability_req <= 0.987 and w_C3 > 0.129 and w_C6 <= 0.080 and w_C2 <= 0.235,1641,0.08205,A5,0.6520414381474711
+reliability_req <= 0.987 and w_C3 > 0.129 and w_C6 <= 0.080 and w_C2 > 0.235,611,0.03055,A6,0.5073649754500819
+reliability_req <= 0.987 and w_C3 > 0.129 and w_C6 > 0.080 and w_C1 <= 0.255,2900,0.145,A5,0.8827586206896552
+reliability_req <= 0.987 and w_C3 > 0.129 and w_C6 > 0.080 and w_C1 > 0.255,501,0.02505,A5,0.5848303393213573
+reliability_req > 0.987 and reliability_req <= 0.996 and w_C3 <= 0.123 and beta <= 1.451,1490,0.0745,A6,0.62751677852349
+reliability_req > 0.987 and reliability_req <= 0.996 and w_C3 <= 0.123 and beta > 1.451,1619,0.08095,A3,0.5484867201976529
+reliability_req > 0.987 and reliability_req <= 0.996 and w_C3 > 0.123 and omega_midpeak <= 0.151,936,0.0468,A6,0.5480769230769231
+reliability_req > 0.987 and reliability_req <= 0.996 and w_C3 > 0.123 and omega_midpeak > 0.151,2471,0.12355,A6,0.895993524888709
+reliability_req > 0.987 and reliability_req > 0.996 and reliability_req <= 0.997,1114,0.0557,A4,1.0
+reliability_req > 0.987 and reliability_req > 0.996 and reliability_req > 0.997,1113,0.05565,none,1.0

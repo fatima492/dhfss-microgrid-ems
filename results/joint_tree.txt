@@ -1,0 +1,42 @@
+|--- reliability_req <= 0.987
+|   |--- w_C3 <= 0.129
+|   |   |--- w_C1 <= 0.168
+|   |   |   |--- beta <= 1.635
+|   |   |   |   |--- class: A5
+|   |   |   |--- beta >  1.635
+|   |   |   |   |--- class: A1
+|   |   |--- w_C1 >  0.168
+|   |   |   |--- omega_offpeak <= 0.171
+|   |   |   |   |--- class: A5
+|   |   |   |--- omega_offpeak >  0.171
+|   |   |   |   |--- class: A1
+|   |--- w_C3 >  0.129
+|   |   |--- w_C6 <= 0.080
+|   |   |   |--- w_C2 <= 0.235
+|   |   |   |   |--- class: A5
+|   |   |   |--- w_C2 >  0.235
+|   |   |   |   |--- class: A6
+|   |   |--- w_C6 >  0.080
+|   |   |   |--- w_C1 <= 0.255
+|   |   |   |   |--- class: A5
+|   |   |   |--- w_C1 >  0.255
+|   |   |   |   |--- class: A5
+|--- reliability_req >  0.987
+|   |--- reliability_req <= 0.996
+|   |   |--- w_C3 <= 0.123
+|   |   |   |--- beta <= 1.451
+|   |   |   |   |--- class: A6
+|   |   |   |--- beta >  1.451
+|   |   |   |   |--- class: A3
+|   |   |--- w_C3 >  0.123
+|   |   |   |--- omega_midpeak <= 0.151
+|   |   |   |   |--- class: A6
+|   |   |   |--- omega_midpeak >  0.151
+|   |   |   |   |--- class: A6
+|   |--- reliability_req >  0.996
+|   |   |--- reliability_req <= 0.997
+|   |   |   |--- class: A4
+|   |   |--- reliability_req >  0.997
+|   |   |   |--- class: none
+
+accuracy 0.7114

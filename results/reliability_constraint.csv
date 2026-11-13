@@ -1,5 +1,8 @@
-threshold,feasible,ranking
-0.985,"A1, A2, A3, A4",A1 > A3 > A4 > A2
-0.99,"A2, A3, A4",A3 > A4 > A2
-0.995,"A3, A4",A3 > A4
-0.9975,,
+measure,threshold,feasible,ranking
+supply reliability,0.985,"A1, A2, A3, A4, A5, A6",A5 > A6 > A1 > A3 > A2 > A4
+supply reliability,0.99,"A2, A3, A4, A6",A6 > A3 > A2 > A4
+supply reliability,0.995,"A3, A4, A6",A6 > A3 > A4
+supply reliability,0.9975,,
+end-use service ratio,0.95,"A1, A2, A3, A4, A5, A6",A5 > A6 > A1 > A3 > A2 > A4
+end-use service ratio,0.97,"A1, A2, A5",A5 > A1 > A2
+end-use service ratio,0.99,A2,A2

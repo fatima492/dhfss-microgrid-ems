@@ -1,8 +1,11 @@
-"""Morris elementary-effects screening (Morris, 1991; Campolongo et al., 2007) with SALib.
+"""Morris elementary-effects screening (Morris, 1991; Campolongo et al., 2007) with SALib, and the
+two-parameter preference map of the revision.
 
-Each sample re-tunes the rule thresholds on the training years and re-simulates the test
-years. Outputs: gap between the two leading baseline policies, Q(A1) - Q(A3), and the lead
-of the hybrid policy, Q(A4) - max_{i != 4} Q(A_i); the winner is recorded as well.
+Each sample re-tunes the rule settings on the training years (cost objective for A2/A4,
+multi-criteria objective for A5/A6) and re-simulates the test years. Outputs (revision):
+* gap_A5_A6: Q(A5) - Q(A6), the two multi-criteria-tuned storage policies (baseline leaders);
+* lead_storage: max(Q(A5), Q(A6)) - max(Q(A1), Q(A3)), the lead of the best tuned storage policy
+  over the best policy without storage; the winner is recorded as well.
 """
 from __future__ import annotations
 
@@ -14,21 +17,39 @@ import pandas as pd
 
 FACTORS = [("grid_max", 8.0, 20.0), ("c_unmet", 1.0, 10.0), ("battery_kwh", 10.0, 40.0),
            ("dr_cap", 0.05, 0.25), ("tariff_ratio", 1.5, 4.0)]
-OUTPUTS = ["gap_A1_A3", "lead_A4"]
+OUTPUTS = ["gap_A5_A6", "lead_storage"]
 R_TRAJ = 20
 LEVELS = 4
 
 
+def _targets_str(R, P):
+    return "; ".join(f"{a}:{P.setting_label(s)}" for a, s in R["targets"].items())
+
+
 def _eval(x):
     import warnings; warnings.simplefilter("ignore")
-    import ems_data as E, mcdm as D, pipeline as P
+    import ems_data as E, pipeline as P
     params = {f[0]: float(v) for f, v in zip(FACTORS[:4], x[:4])}
     prices = dict(E.CONFIG["prices"]); prices["t3_onpeak"] = 0.10 * float(x[4])
     R = P.run(params, prices=prices)
     Q, _, _, _ = P.base_Q(R["blocks"])
-    return {**{f[0]: float(v) for f, v in zip(FACTORS, x)}, "Q_A1": Q[0], "Q_A2": Q[1], "Q_A3": Q[2], "Q_A4": Q[3],
-            "gap_A1_A3": Q[0] - Q[2], "lead_A4": Q[3] - max(Q[0], Q[1], Q[2]),
-            "winner": P.ALTS[int(np.argmax(Q))], "targets": f"{R['targets']['A2']}/{R['targets']['A4']}"}
+    q = dict(zip(P.ALTS, Q))
+    return {**{f[0]: float(v) for f, v in zip(FACTORS, x)}, **{f"Q_{a}": q[a] for a in P.ALTS},
+            "gap_A5_A6": q["A5"] - q["A6"], "lead_storage": max(q["A5"], q["A6"]) - max(q["A1"], q["A3"]),
+            "winner": P.ALTS[int(np.argmax(Q))], "targets": _targets_str(R, P)}
+
+
+def preference_eval(args):
+    """Winner, runner-up and margin for one (grid limit, tariff ratio) cell, with re-tuning."""
+    import warnings; warnings.simplefilter("ignore")
+    import ems_data as E, pipeline as P
+    gmax, ratio = args
+    prices = dict(E.CONFIG["prices"]); prices["t3_onpeak"] = 0.10 * ratio
+    R = P.run({"grid_max": gmax}, prices=prices)
+    Q, _, _, _ = P.base_Q(R["blocks"])
+    o = np.argsort(-Q)
+    return {"grid_max": gmax, "tariff_ratio": ratio, **dict(zip(P.ALTS, Q)), "winner": P.ALTS[o[0]],
+            "runner_up": P.ALTS[o[1]], "margin": float(Q[o[0]] - Q[o[1]]), "targets": _targets_str(R, P)}
 
 
 def problem():

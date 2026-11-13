@@ -6,6 +6,10 @@ Energy balance at every 15-min step (kW):
     grid limit: P_grid->load + P_ch,grid <= P_grid_max
     storage:    E_{t+1} = E_t + eta_ch (P_ch,RE + P_ch,grid) dt - P_dis dt / eta_dis  (kWh)
 
+Revision (2026-11): policies A5/A6 (battery rules tuned to the multi-criteria objective), the
+discharge-mode option of the battery rule, the demand-side comfort criterion C6 and the
+end-use service ratio (variant of C2), and the limited-foresight controllers L2F/L4F.
+
 Storage provenance: the stored energy is split into a renewable-origin pool and a
 grid-origin pool. Charging adds to the pool of its source; discharging draws from the
 two pools in proportion to their current shares (well-mixed store). The initial
@@ -25,15 +29,19 @@ BASE = {
     "battery_kwh": 20.0, "soc_min": 0.20, "soc_max": 0.90, "soc0": 0.50,
     "p_ch": 5.0, "p_dis": 5.0, "eta_ch": 0.95, "eta_dis": 0.95,
     "grid_max": 14.0,
-    "grid_charging": True, "grid_charge_target": 0.60,
+    "grid_charging": True, "grid_charge_target": 0.60, "discharge_mode": "onpeak",
     "dr_cap": 0.15, "dr_elasticity": 0.30, "dr_rebound": 0.50,
     "c_deg": 0.015, "c_bess_fixed": 800.0, "c_dr": 0.05, "c_dr_fixed": 150.0,
     "c_unmet": 5.0, "fixed_cost_mult": 1.0,
+    "comfort_delta": 0.5,          # discomfort weight of a shifted (rebounding) kWh relative to a forgone kWh (C6)
 }
-POLICIES = ["A1", "A2", "A3", "A4"]
-HARDWARE = {"A1": (False, False), "A2": (True, False), "A3": (False, True), "A4": (True, True)}
-SHORT = {"A1": "Renewable-first", "A2": "Battery", "A3": "Price-elastic DR", "A4": "Hybrid",
-         "L2": "LP, battery", "L3": "LP, DR", "L4": "LP, battery + DR"}
+POLICIES = ["A1", "A2", "A3", "A4", "A5", "A6"]
+HARDWARE = {"A1": (False, False), "A2": (True, False), "A3": (False, True), "A4": (True, True),
+            "A5": (True, False), "A6": (True, True)}
+SHORT = {"A1": "Renewable-first", "A2": "Battery, cost-tuned", "A3": "Price-elastic DR", "A4": "Hybrid, cost-tuned",
+         "A5": "Battery, MC-tuned", "A6": "Hybrid, MC-tuned",
+         "L2": "LP, battery", "L3": "LP, DR", "L4": "LP, battery + DR",
+         "L2F": "Forecast LP, battery", "L4F": "Forecast LP, battery + DR"}
 
 
 def dr_fraction(price: np.ndarray, p: dict) -> np.ndarray:
@@ -58,6 +66,7 @@ def simulate(df: pd.DataFrame, policy: str, p: dict) -> pd.DataFrame:
     E = p["battery_kwh"] * p["soc0"] if has_bat else 0.0
     E_re = 0.0                                                     # renewable-origin content
     gmax = p["grid_max"]; ec, ed = p["eta_ch"], p["eta_dis"]
+    dis_any = p.get("discharge_mode", "onpeak") == "any"          # revision: self-consumption discharge rule
     keys = ["req", "dr", "adj", "re_load", "ch_re", "ch_g", "dis", "dis_re", "g_load", "unmet", "curt", "soc"]
     cols = {k: np.zeros(n) for k in keys}
     deferred, rebound_rate = 0.0, 0.0
@@ -73,7 +82,7 @@ def simulate(df: pd.DataFrame, policy: str, p: dict) -> pd.DataFrame:
         if has_bat:
             ch_re = max(0.0, min(surplus, p["p_ch"], (Emax - E) / (ec * DT)))
             E += ec * ch_re * DT; E_re += ec * ch_re * DT; surplus -= ch_re
-            need = deficit if onpeak[t] else max(0.0, deficit - gmax)
+            need = deficit if (onpeak[t] or dis_any) else max(0.0, deficit - gmax)
             if need > 0:
                 dis = max(0.0, min(need, p["p_dis"], ed * (E - Emin) / DT))
                 if dis > 0:
@@ -196,10 +205,11 @@ def lp_benchmark(df: pd.DataFrame, p: dict, has_bat=True, has_dr=True, label="L4
 
 
 # ---------------------------------------------------------------- criteria
-CRITERIA = ["C1", "C2", "C3", "C4", "C5"]
-CRIT_NAMES = {"C1": "Cost efficiency (per served kWh)", "C2": "Supply reliability",
+CRITERIA = ["C1", "C2", "C3", "C4", "C5", "C6"]
+CRITERIA_V1 = ["C1", "C2", "C3", "C4", "C5"]          # five-criterion specification of the first submission
+CRIT_NAMES = {"C1": "Cost efficiency (per served kWh)", "C2": "Supply reliability (involuntary)",
               "C3": "Renewable self-consumption", "C4": "Renewable-origin supply share",
-              "C5": "Peak grid-import headroom"}
+              "C5": "Peak grid-import headroom", "C6": "Demand-side comfort"}
 BLOCK_LEN = {"t1_offpeak": 32, "t2_midpeak": 40, "t3_onpeak": 24}
 
 
@@ -223,7 +233,7 @@ def block_criteria(sim: pd.DataFrame, df: pd.DataFrame, p: dict) -> pd.DataFrame
         ref_penalty=("ref_penalty", "sum"), served=("served", "sum"),
         unmet=("unmet", "sum"), adj=("adj", "sum"), re=("re", "sum"), re_load=("re_load", "sum"),
         ch_re=("ch_re", "sum"), dis=("dis", "sum"), dis_re=("dis_re", "sum"), grid=("grid", "sum"),
-        peak=("grid", "max"), curt=("curt", "sum"))
+        peak=("grid", "max"), curt=("curt", "sum"), dr=("dr", "sum"), req=("req", "sum"), load=("load", "sum"))
     agg = agg[agg["n"] == agg.index.get_level_values("period").map(BLOCK_LEN)]
     out = pd.DataFrame(index=agg.index)
     y = agg["energy_cost"] / agg["served"]                         # USD per served kWh
@@ -238,8 +248,14 @@ def block_criteria(sim: pd.DataFrame, df: pd.DataFrame, p: dict) -> pd.DataFrame
     out["C4"] = (agg["re_load"] + agg["dis_re"]) / agg["adj"]
     out["C4_local"] = (agg["re_load"] + agg["dis"]) / agg["adj"]
     out["C5"] = 1 - agg["peak"] / gmax
+    # demand-side service accounting (revision): curtailed energy that does not rebound is forgone
+    forgone = (1.0 - p["dr_rebound"]) * agg["dr"]; shifted = p["dr_rebound"] * agg["dr"]
+    out["C2_svc"] = 1 - (agg["unmet"] + forgone) / agg["req"]          # end-use service ratio
+    out["C6"] = 1 - (forgone + p.get("comfort_delta", 0.5) * shifted) / agg["req"]   # demand-side comfort
+    out["C6_forgone"] = 1 - forgone / agg["req"]
+    out["C6_all"] = 1 - agg["dr"] / agg["req"]
     for k in ["cost", "energy_cost", "served", "unmet", "adj", "re", "re_load", "ch_re", "dis", "dis_re",
-              "grid", "curt"]:
+              "grid", "curt", "dr", "req", "load"]:
         out[k] = agg[k] * (1.0 if k in ("cost", "energy_cost", "served") else DT)
     out["peak"] = agg["peak"]
     return out.reset_index()
@@ -252,3 +268,69 @@ def period_totals(blocks: pd.DataFrame) -> pd.DataFrame:
         "unmet_kwh": g["unmet"].sum(), "adj_kwh": g["adj"].sum(), "re_kwh": g["re"].sum(),
         "re_used_kwh": g["re_load"].sum() + g["ch_re"].sum(), "re_origin_kwh": g["re_load"].sum() + g["dis_re"].sum(),
         "grid_kwh": g["grid"].sum(), "mean_block_peak_kw": g["peak"].mean(), "curt_kwh": g["curt"].sum()})
+
+
+# ---------------------------------------------------------------- limited-foresight controller (revision)
+def persistence_forecast(df: pd.DataFrame, lag_steps: int = 96) -> pd.DataFrame:
+    """Day-ahead persistence forecast: load and renewable output of the previous 24 h.
+
+    The first day is forecast with its own values (no earlier data inside the evaluated block)."""
+    fc = df.copy()
+    for c in ("load_kw", "pv_kw", "wind_kw"):
+        v = df[c].to_numpy()
+        fc[c] = np.r_[v[:lag_steps], v[:-lag_steps]]
+    return fc
+
+
+def forecast_dispatch(df: pd.DataFrame, p: dict, has_dr: bool, label: str) -> pd.DataFrame:
+    """Implementable battery controller without perfect foresight (L2F / L4F).
+
+    At 23:00 a daily LP (same model as ``lp_benchmark``) is solved on the day-ahead persistence
+    forecast of load and renewables. The planned grid charging and battery discharge are then executed
+    against the actual data: renewable surplus is always stored if there is room, the battery
+    discharges the planned amount (and anything above the grid limit), and grid charging follows the
+    plan within the grid limit. Demand response, if present, follows the price-elastic rule of A3,
+    which coincides with the LP's DR decision in every window of the test years."""
+    fc = persistence_forecast(df)
+    plan = lp_benchmark(fc, p, True, has_dr, label + "_plan")
+    ch_g_plan = plan["ch_g"].to_numpy(); dis_plan = plan["dis"].to_numpy()
+    n = len(df)
+    load = df["load_kw"].to_numpy(); re = (df["pv_kw"] + df["wind_kw"]).to_numpy()
+    price = df["price"].to_numpy(); hour = df.index.hour.to_numpy(); minute = df.index.minute.to_numpy()
+    offpeak = (df["period"] == "t1_offpeak").to_numpy()
+    rho = dr_fraction(price, p) if has_dr else np.zeros(n)
+    Emax = p["battery_kwh"] * p["soc_max"]; Emin = p["battery_kwh"] * p["soc_min"]
+    E = p["battery_kwh"] * p["soc0"]; E_re = 0.0
+    gmax = p["grid_max"]; ec, ed = p["eta_ch"], p["eta_dis"]
+    keys = ["req", "dr", "adj", "re_load", "ch_re", "ch_g", "dis", "dis_re", "g_load", "unmet", "curt", "soc"]
+    cols = {k: np.zeros(n) for k in keys}
+    deferred, rebound_rate = 0.0, 0.0
+    for t in range(n):
+        if hour[t] == 23 and minute[t] == 0:
+            rebound_rate = deferred / (32 * DT); deferred = 0.0
+        req = load[t] + (rebound_rate if offpeak[t] else 0.0)
+        dr = rho[t] * load[t]
+        deferred += p["dr_rebound"] * dr * DT
+        adj = req - dr
+        re_load = min(re[t], adj); deficit = adj - re_load; surplus = re[t] - re_load
+        ch_re = max(0.0, min(surplus, p["p_ch"], (Emax - E) / (ec * DT)))
+        E += ec * ch_re * DT; E_re += ec * ch_re * DT; surplus -= ch_re
+        dis = dis_re = 0.0
+        need = min(deficit, max(dis_plan[t], deficit - gmax))
+        if need > 0:
+            dis = max(0.0, min(need, p["p_dis"], ed * (E - Emin) / DT))
+            if dis > 0:
+                share = E_re / E if E > 1e-12 else 0.0
+                drawn = dis * DT / ed
+                E -= drawn; E_re -= share * drawn; dis_re = share * dis; deficit -= dis
+        g_load = min(deficit, gmax); unmet = deficit - g_load
+        ch_g = 0.0
+        if ch_g_plan[t] > 1e-9:
+            ch_g = max(0.0, min(ch_g_plan[t], p["p_ch"] - ch_re, gmax - g_load, (Emax - E) / (ec * DT)))
+            E += ec * ch_g * DT
+        E_re = min(max(E_re, 0.0), E)
+        vals = (req, dr, adj, re_load, ch_re, ch_g, dis, dis_re, g_load, unmet, surplus, E)
+        for k, v in zip(keys, vals):
+            cols[k][t] = v
+    out = pd.DataFrame(cols, index=df.index)
+    return _finish(out, df, True, has_dr, p, label)
